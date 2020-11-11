@@ -1,0 +1,42 @@
+#!/bin/bash
+
+echo "Name of the File"
+read -r q_filename
+
+echo "Which Shell"
+read -r q_shell
+
+echo "Who is the author"
+read -r q_author
+
+echo "Date of creation will be $(date)"
+q_date=$(date)
+
+echo "What this does"
+read -r q_description
+
+echo -e "Open file after creation [y | n]\n"
+read -r q_open
+
+touch "$q_filename"
+filename="$q_filename"
+
+echo '#!/bin/'"$q_shell" >> "$filename"
+
+echo "################################################" >> "$filename"
+
+echo "## Author: $q_author" >> "$filename"
+echo "## Date: $q_date" >> "$filename"
+echo "## Description: $q_description" >> "$filename"
+echo "## Modification:" >> "$filename"
+
+echo "################################################" >> "$filename"
+
+chmod u+x "$filename"
+
+if [ $q_open == "y" ]
+then
+	vim $filename
+else
+	exit
+fi
