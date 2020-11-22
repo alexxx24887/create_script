@@ -22,9 +22,6 @@ touch "$q_filename"
 filename="$q_filename"
 
 echo '#!/bin/'"$q_shell" >> "$filename"
-
-echo "################################################" >> "$filename"
-
 echo "## Author: $q_author" >> "$filename"
 echo "## Date: $q_date" >> "$filename"
 echo "## Description: $q_description" >> "$filename"
@@ -34,9 +31,9 @@ echo "################################################" >> "$filename"
 
 chmod u+x "$filename"
 
-if [ $q_open == "y" ]
+if [ "$q_open" == "y" ]
 then
-	vim $filename
+	vim "$filename"
 else
 	exit
 fi
